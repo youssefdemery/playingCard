@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Animated, Easing, StyleSheet, View, useWindowDimensions } from "react-native";
 
 import { ArrowButton } from "@/components/arrow-button";
@@ -11,7 +11,7 @@ const EDGE_MARGIN = 16;
 export default function HomeScreen() {
   const { height } = useWindowDimensions();
   const [modalVisible, setModalVisible] = useState(false);
-  const spin = useRef(new Animated.Value(0)).current;
+  const [spin] = useState(() => new Animated.Value(0));
   useEffect(() => {
     Animated.timing(spin, {
       toValue: 1,
@@ -26,7 +26,7 @@ export default function HomeScreen() {
     outputRange: ["0deg", "360deg"],
   });
 
-  const offsetY = useRef(new Animated.Value(0)).current;
+  const [offsetY] = useState(() => new Animated.Value(0));
   const [y, setY] = useState(0);
   const maxY = Math.max(0, (height - CARD_HEIGHT) / 2 - EDGE_MARGIN);
 
